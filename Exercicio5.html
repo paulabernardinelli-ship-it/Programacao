@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Tarefas</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .container {
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            padding: 40px;
+            width: 100%;
+            max-width: 600px;
+        }
+        
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 2.5rem;
+        }
+        
+        .subtitle {
+            color: #666;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+        }
+        
+        .input-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+        
+        #novaTarefa {
+            flex: 1;
+            padding: 15px 20px;
+            border: 2px solid #e1e5e9;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+        
+        #novaTarefa:focus {
+            border-color: #667eea;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
+        }
+        
+        #adicionarTarefa {
+            background: linear-gradient(to right, #667eea, #764ba2);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 15px 25px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+        
+        #adicionarTarefa:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        #adicionarTarefa:active {
+            transform: translateY(0);
+        }
+        
+        #adicionarTarefa:disabled {
+            background: #cccccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .lista-container {
+            border: 2px solid #e1e5e9;
+            border-radius: 8px;
+            padding: 20px;
+            background-color: #f8f9fa;
+            min-height: 200px;
+        }
+        
+        #listaTarefas {
+            list-style: none;
+        }
+        
+        #listaTarefas li {
+            background-color: white;
+            padding: 15px 20px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 0.3s ease;
+            transition: all 0.3s;
+        }
+        
+        #listaTarefas li:hover {
+            transform: translateX(5px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+        
+        #listaTarefas li:last-child {
+            margin-bottom: 0;
+        }
+        
+        .tarefa-texto {
+            flex: 1;
+            color: #333;
+            font-size: 1rem;
+        }
+        
+        .btn-remover {
+            background-color: #ff6b6b;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 8px 12px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+        
+        .btn-remover:hover {
+            background-color: #ff5252;
+            transform: scale(1.05);
+        }
+        
+        .lista-vazia {
+            text-align: center;
+            color: #666;
+            font-style: italic;
+            padding: 40px 20px;
+        }
+        
+        .contador-tarefas {
+            margin-top: 20px;
+            text-align: center;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .instructions {
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 30px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .instructions h3 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        .instructions p {
+            color: #666;
+            line-height: 1.5;
+            margin-bottom: 5px;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 25px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .input-group {
+                flex-direction: column;
+            }
+            
+            #adicionarTarefa {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Lista de Tarefas</h1>
+        <p class="subtitle">Organize suas tarefas do dia</p>
+        
+        <div class="input-group">
+            <input type="text" id="novaTarefa" placeholder="Digite uma nova tarefa...">
+            <button id="adicionarTarefa">Adicionar Tarefa</button>
+        </div>
+        
+        <div class="lista-container">
+            <ul id="listaTarefas">
+                <li class="lista-vazia">Nenhuma tarefa adicionada ainda</li>
+            </ul>
+        </div>
+        
+        <div class="contador-tarefas">
+            Total de tarefas: <span id="contador">0</span>
+        </div>
+        
+        <div class="instructions">
+            <h3>Como usar:</h3>
+            <p>1. Digite uma tarefa no campo de texto</p>
+            <p>2. Clique em "Adicionar Tarefa" ou pressione Enter</p>
+            <p>3. Para remover uma tarefa, clique no botão "Remover" ao lado dela</p>
+        </div>
+    </div>
+
+    <script>
+        // Elementos do DOM
+        const inputTarefa = document.getElementById('novaTarefa');
+        const botaoAdicionar = document.getElementById('adicionarTarefa');
+        const listaTarefas = document.getElementById('listaTarefas');
+        const contadorElemento = document.getElementById('contador');
+        
+        // Contador de tarefas
+        let contadorTarefas = 0;
+        
+        // Função para atualizar o contador
+        function atualizarContador() {
+            contadorElemento.textContent = contadorTarefas;
+        }
+        
+        // Função para adicionar uma nova tarefa
+        function adicionarTarefa() {
+            const texto = inputTarefa.value.trim();
+            
+            // Verifica se o campo não está vazio
+            if (texto === '') {
+                alert('Por favor, digite uma tarefa!');
+                return;
+            }
+            
+            // Remove a mensagem de lista vazia se for a primeira tarefa
+            if (contadorTarefas === 0) {
+                listaTarefas.innerHTML = '';
+            }
+            
+            // Cria um novo elemento <li>
+            const novaTarefa = document.createElement('li');
+            
+            // Cria o texto da tarefa
+            const tarefaTexto = document.createElement('span');
+            tarefaTexto.className = 'tarefa-texto';
+            tarefaTexto.textContent = texto;
+            
+            // Cria o botão de remover
+            const botaoRemover = document.createElement('button');
+            botaoRemover.className = 'btn-remover';
+            botaoRemover.textContent = 'Remover';
+            
+            // Adiciona evento de clique ao botão remover
+            botaoRemover.addEventListener('click', function() {
+                novaTarefa.remove();
+                contadorTarefas--;
+                atualizarContador();
+                
+                // Se não houver mais tarefas, mostra a mensagem de lista vazia
+                if (contadorTarefas === 0) {
+                    listaTarefas.innerHTML = '<li class="lista-vazia">Nenhuma tarefa adicionada ainda</li>';
+                }
+            });
+            
+            // Adiciona os elementos ao <li>
+            novaTarefa.appendChild(tarefaTexto);
+            novaTarefa.appendChild(botaoRemover);
+            
+            // Adiciona o <li> à lista
+            listaTarefas.appendChild(novaTarefa);
+            
+            // Limpa o campo de input
+            inputTarefa.value = '';
+            
+            // Foca novamente no campo de input
+            inputTarefa.focus();
+            
+            // Atualiza o contador
+            contadorTarefas++;
+            atualizarContador();
+        }
+        
+        // Evento do botão "Adicionar Tarefa"
+        botaoAdicionar.addEventListener('click', adicionarTarefa);
+        
+        // Evento para pressionar Enter no campo de texto
+        inputTarefa.addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                adicionarTarefa();
+            }
+        });
+        
+        // Inicializa o contador
+        atualizarContador();
+    </script>
+</body>
+</html>

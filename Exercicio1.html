@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contador Simples</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+        
+        h2 {
+            font-size: 3em;
+            color: #333;
+            margin: 20px 0;
+        }
+        
+        button {
+            padding: 10px 20px;
+            margin: 10px;
+            font-size: 1em;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        #incrementar {
+            background-color: #4CAF50;
+            color: white;
+        }
+        
+        #incrementar:hover {
+            background-color: #45a049;
+        }
+        
+        #resetar {
+            background-color: #f44336;
+            color: white;
+        }
+        
+        #resetar:hover {
+            background-color: #da190b;
+        }
+    </style>
+</head>
+<body>
+    <h1>Contador Simples</h1>
+    <h2 id="contador">0</h2>
+    
+    <button id="incrementar">Incrementar</button>
+    <button id="resetar">Resetar</button>
+
+    <script>
+        // Variável para guardar o valor do contador
+        let contador = 0;
+        
+        // Elementos do DOM
+        const elementoContador = document.getElementById('contador');
+        const botaoIncrementar = document.getElementById('incrementar');
+        const botaoResetar = document.getElementById('resetar');
+        
+        // Função para atualizar o contador na tela
+        function atualizarContador() {
+            elementoContador.textContent = contador;
+        }
+        
+        // Evento do botão Incrementar
+        botaoIncrementar.addEventListener('click', function() {
+            contador++;
+            atualizarContador();
+        });
+        
+        // Evento do botão Resetar
+        botaoResetar.addEventListener('click', function() {
+            contador = 0;
+            atualizarContador();
+        });
+        
+        // Inicializar o contador na tela
+        atualizarContador();
+    </script>
+</body>
+</html>

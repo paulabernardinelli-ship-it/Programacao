@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saudação Interativa</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .container {
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            padding: 40px;
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+        }
+        
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 2.2rem;
+        }
+        
+        .description {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+            line-height: 1.5;
+        }
+        
+        .input-group {
+            margin-bottom: 25px;
+            text-align: left;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+            font-weight: 500;
+        }
+        
+        input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e1e1e1;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+        
+        input:focus {
+            border-color: #2575fc;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(37, 117, 252, 0.2);
+        }
+        
+        button {
+            background: linear-gradient(to right, #6a11cb, #2575fc);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 15px 30px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+            margin-bottom: 25px;
+        }
+        
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        button:active {
+            transform: translateY(0);
+        }
+        
+        .message-container {
+            min-height: 80px;
+            padding: 20px;
+            border-radius: 8px;
+            background-color: #f8f9fa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+        
+        .message {
+            font-size: 1.2rem;
+            color: #333;
+            text-align: center;
+        }
+        
+        .error {
+            background-color: #ffe6e6;
+            color: #d32f2f;
+        }
+        
+        .success {
+            background-color: #e6f7e9;
+            color: #2e7d32;
+        }
+        
+        .example {
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: #888;
+            font-style: italic;
+        }
+        
+        @media (max-width: 600px) {
+            .container {
+                padding: 25px;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Saudação Interativa</h1>
+        <p class="description">Digite seu nome abaixo para receber uma saudação personalizada!</p>
+        
+        <div class="input-group">
+            <label for="nome">Seu nome:</label>
+            <input type="text" id="nome" placeholder="Digite seu nome aqui">
+        </div>
+        
+        <button id="saudar">Saudar</button>
+        
+        <div class="message-container">
+            <p id="mensagem" class="message">Aguardando seu nome...</p>
+        </div>
+        
+        <p class="example">Exemplo: Digite "Maria" e clique em "Saudar"</p>
+    </div>
+
+    <script>
+        // Elementos do DOM
+        const inputNome = document.getElementById('nome');
+        const botaoSaudar = document.getElementById('saudar');
+        const elementoMensagem = document.getElementById('mensagem');
+        const containerMensagem = document.querySelector('.message-container');
+        
+        // Função para exibir a saudação
+        function exibirSaudacao() {
+            const nome = inputNome.value.trim();
+            
+            if (nome === '') {
+                elementoMensagem.textContent = 'Por favor, digite seu nome.';
+                containerMensagem.className = 'message-container error';
+            } else {
+                elementoMensagem.textContent = `Olá, ${nome}! Seja bem-vindo(a)!`;
+                containerMensagem.className = 'message-container success';
+            }
+        }
+        
+        // Evento do botão "Saudar"
+        botaoSaudar.addEventListener('click', exibirSaudacao);
+        
+        // Evento para pressionar Enter no campo de texto
+        inputNome.addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                exibirSaudacao();
+            }
+        });
+        
+        // Evento para limpar a mensagem quando o usuário começar a digitar
+        inputNome.addEventListener('input', function() {
+            if (inputNome.value.trim() === '') {
+                elementoMensagem.textContent = 'Aguardando seu nome...';
+                containerMensagem.className = 'message-container';
+            }
+        });
+    </script>
+</body>
+</html>

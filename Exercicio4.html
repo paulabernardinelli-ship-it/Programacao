@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ - Accordion Simples</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 20px;
+        }
+        
+        .container {
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            padding: 40px;
+            width: 100%;
+            max-width: 800px;
+        }
+        
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 2.5rem;
+        }
+        
+        .subtitle {
+            color: #666;
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 1.1rem;
+        }
+        
+        .faq-item {
+            border: 2px solid #e1e5e9;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .faq-item:hover {
+            border-color: #667eea;
+        }
+        
+        .faq-item.active {
+            border-color: #667eea;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.2);
+        }
+        
+        .pergunta {
+            background-color: #f8f9fa;
+            padding: 20px 25px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background-color 0.3s ease;
+        }
+        
+        .pergunta:hover {
+            background-color: #e9ecef;
+        }
+        
+        .pergunta h3 {
+            color: #333;
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin: 0;
+        }
+        
+        .icone {
+            font-size: 1.5rem;
+            color: #667eea;
+            transition: transform 0.3s ease;
+        }
+        
+        .faq-item.active .icone {
+            transform: rotate(180deg);
+        }
+        
+        .resposta {
+            padding: 0 25px;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            background-color: white;
+        }
+        
+        .faq-item.active .resposta {
+            padding: 20px 25px;
+            max-height: 500px;
+        }
+        
+        .resposta p {
+            color: #555;
+            line-height: 1.6;
+            font-size: 1rem;
+        }
+        
+        .escondido {
+            display: none;
+        }
+        
+        .instructions {
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 30px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .instructions h3 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        .instructions p {
+            color: #666;
+            line-height: 1.5;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 25px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .pergunta {
+                padding: 15px 20px;
+            }
+            
+            .pergunta h3 {
+                font-size: 1.1rem;
+            }
+            
+            .resposta p {
+                font-size: 0.95rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Perguntas Frequentes</h1>
+        <p class="subtitle">Clique nas perguntas para ver as respostas</p>
+        
+        <div class="faq-item">
+            <div class="pergunta">
+                <h3>O que é DOM?</h3>
+                <span class="icone">▼</span>
+            </div>
+            <div class="resposta escondido">
+                <p>DOM (Document Object Model) é uma interface de programação para documentos HTML e XML. Ele representa a estrutura do documento como uma árvore de objetos, permitindo que programas e scripts possam acessar e modificar dinamicamente o conteúdo, estrutura e estilo do documento.</p>
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="pergunta">
+                <h3>O que é JavaScript?</h3>
+                <span class="icone">▼</span>
+            </div>
+            <div class="resposta escondido">
+                <p>JavaScript é uma linguagem de programação de alto nível, interpretada e orientada a objetos. É uma das principais tecnologias da World Wide Web, permitindo a criação de páginas interativas e dinâmicas. JavaScript é executado no lado do cliente (navegador) e pode manipular o DOM para alterar o conteúdo da página em tempo real.</p>
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="pergunta">
+                <h3>Qual a diferença entre let, const e var?</h3>
+                <span class="icone">▼</span>
+            </div>
+            <div class="resposta escondido">
+                <p><strong>var</strong>: Tem escopo de função e é hoisted (elevada). Pode ser redeclarada e atualizada.<br>
+                   <strong>let</strong>: Tem escopo de bloco. Pode ser atualizada mas não redeclarada no mesmo escopo.<br>
+                   <strong>const</strong>: Tem escopo de bloco. Não pode ser atualizada nem redeclarada. Deve ser inicializada na declaração.</p>
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="pergunta">
+                <h3>O que é CSS?</h3>
+                <span class="icone">▼</span>
+            </div>
+            <div class="resposta escondido">
+                <p>CSS (Cascading Style Sheets) é uma linguagem de estilo usada para descrever a apresentação de documentos HTML. Com CSS você pode controlar cores, fontes, espaçamento, layout e muitos outros aspectos visuais de uma página web, separando o conteúdo da apresentação.</p>
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="pergunta">
+                <h3>O que é um evento em JavaScript?</h3>
+                <span class="icone">▼</span>
+            </div>
+            <div class="resposta escondido">
+                <p>Eventos são ações ou ocorrências que acontecem no navegador, como cliques de mouse, pressionamento de teclas, carregamento de página, etc. JavaScript pode "ouvir" esses eventos e executar código em resposta através de event listeners, permitindo criar interatividade nas páginas web.</p>
+            </div>
+        </div>
+        
+        <div class="instructions">
+            <h3>Como funciona este FAQ?</h3>
+            <p>Este accordion foi criado usando HTML, CSS e JavaScript. Cada pergunta tem um evento de clique que alterna a classe "escondido" na resposta correspondente, mostrando ou escondendo o conteúdo. A transição suave é feita com CSS transitions.</p>
+        </div>
+    </div>
+
+    <script>
+        // Seleciona todos os elementos de pergunta
+        const perguntas = document.querySelectorAll('.pergunta');
+        
+        // Adiciona evento de clique a cada pergunta
+        perguntas.forEach(pergunta => {
+            pergunta.addEventListener('click', function() {
+                // Encontra o item FAQ pai
+                const faqItem = this.parentElement;
+                // Encontra a resposta dentro do mesmo item FAQ
+                const resposta = this.nextElementSibling;
+                
+                // Alterna a classe 'active' no item FAQ
+                faqItem.classList.toggle('active');
+                // Alterna a classe 'escondido' na resposta
+                resposta.classList.toggle('escondido');
+            });
+        });
+    </script>
+</body>
+</html>
